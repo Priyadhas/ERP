@@ -1,40 +1,70 @@
-import React from 'react'
-import { useState } from 'react'
-import HeaderComponent from './components/HeaderComponent'
-import FooterComponent from './components/FooterComponent'
-import ListUserComponent from './components/ListUserComponent'
-import UserComponent from './components/UserComponent'
-import LoginComponent from './components/LoginComponent'
-import './App.css'
-import HomepageComponent from './components/HomepageComponent'
-import ContentComponent from './components/ContentComponent'
-import { BrowserRouter ,Routes,Route} from 'react-router-dom'
-import NewClientForm from './components/NewClientForm'
+import React, { useMemo } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import HeaderComponent from './components/HeaderComponent';
+import FooterComponent from './components/FooterComponent';
+import ListUserComponent from './components/ListUserComponent';
+import UserComponent from './components/UserComponent';
+import LoginComponent from './components/LoginComponent';
+import HomepageComponent from './components/HomepageComponent';
+import NewClientForm from './components/NewClientForm';
+import PriceListForm from './components/PriceListForm';
+import DealPipelineForm from './components/DealPipelineForm';
+import RenewalsForm from './components/RenewalForm';
+import TicketEntryForm from './components/TicketEntryForm';
+import SidebarComponent from './components/SidebarComponent';
+import GetPriceComponent from './components/GetPriceComponent';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <div className='App'>
-      <HeaderComponent/>
-      <BrowserRouter>
-            <Routes>
-        {/* // http://localhost:3000 */}
-        <Route path='/' element= {<LoginComponent/>}></Route>
-        <Route path='/homepage' element= {<HomepageComponent/>}></Route>
-        {/* // http://localhost:3000/list-users */}
-        <Route path='/list-users' element= {<ListUserComponent/>}></Route>
-        {/* // http://localhost:3000/add-user */}
-        <Route path='/add-user' element= {<UserComponent/>}></Route>
-        {/* // http://localhost:3000/add-client */}
-        <Route path='/add-client' element= {<NewClientForm/>}></Route>
-      </Routes>
+    <BrowserRouter>
+      <MainLayout />
     </BrowserRouter>
-      <FooterComponent/>
-    </div>
-    </>
-  )
+  );
 }
 
-export default App
+// 👇 Separated layout to access routing information
+function MainLayout() {
+  const location = useLocation();
+
+  // Define the paths where sidebar should appear
+  const showSidebarPaths = useMemo(() => [
+    '/homepage',
+    '/list-users',
+    '/add-user',
+    '/add-client',
+    '/add-pipeline',
+    '/add-price-list',
+    '/add-renewals',
+    '/add-ticket-entry',
+    '/get-price'
+  ], []);
+
+  const showSidebar = showSidebarPaths.includes(location.pathname);
+
+  return (
+    <div className="d-flex">
+      {showSidebar && <SidebarComponent />}
+      <div className="flex-grow-1 d-flex flex-column min-vh-100">
+        <HeaderComponent />
+        <div className="flex-grow-1 p-4">
+          <Routes>
+            <Route path="/" element={<LoginComponent />} />
+            <Route path="/homepage" element={<HomepageComponent />} />
+            <Route path="/list-users" element={<ListUserComponent />} />
+            <Route path="/add-user" element={<UserComponent />} />
+            <Route path="/add-client" element={<NewClientForm />} />
+            <Route path="/add-pipeline" element={<DealPipelineForm />} />
+            <Route path="/add-price-list" element={<PriceListForm />} />
+            <Route path="/get-price" element={<GetPriceComponent />} />
+            <Route path="/add-renewals" element={<RenewalsForm />} />
+            <Route path="/add-ticket-entry" element={<TicketEntryForm />} />
+          </Routes>
+        </div>
+        <FooterComponent />
+      </div>
+    </div>
+  );
+}
+
+export default App;

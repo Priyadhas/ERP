@@ -1,9 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Select } from "@/components/ui/select";
 
 const ClientForm = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -13,59 +9,155 @@ const ClientForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-xl font-semibold mb-4">Client Details</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <label>Client Name</label>
-        <Input {...register("clientName")} placeholder="Client Name" required />
+    <div className="container mt-5">
+      <div className="card p-4">
+        <h2 className="h4 mb-4">Client Details</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="needs-validation">
+          <div className="mb-3">
+            <label className="form-label">Client Name</label>
+            <input
+              {...register("clientName")}
+              type="text"
+              className="form-control"
+              placeholder="Client Name"
+              required
+            />
+          </div>
 
-        <label>Contact Person</label>
-        <Input {...register("contactPerson")} placeholder="Contact Person" required />
+          <div className="mb-3">
+            <label className="form-label">Contact Person</label>
+            <input
+              {...register("contactPerson")}
+              type="text"
+              className="form-control"
+              placeholder="Contact Person"
+              required
+            />
+          </div>
 
-        <label>Designation</label>
-        <Input {...register("designation")} placeholder="Designation" required />
+          <div className="mb-3">
+            <label className="form-label">Designation</label>
+            <input
+              {...register("designation")}
+              type="text"
+              className="form-control"
+              placeholder="Designation"
+              required
+            />
+          </div>
 
-        <label>Contact Number</label>
-        <Input {...register("contactNumber")} placeholder="Contact Number" type="tel" required />
+          <div className="mb-3">
+            <label className="form-label">Contact Number</label>
+            <input
+              {...register("contactNumber")}
+              type="tel"
+              className="form-control"
+              placeholder="Contact Number"
+              required
+            />
+          </div>
 
-        <label>Email ID</label>
-        <Input {...register("emailId")} placeholder="Email ID" type="email" required />
+          <div className="mb-3">
+            <label className="form-label">Email ID</label>
+            <input
+              {...register("emailId")}
+              type="email"
+              className="form-control"
+              placeholder="Email ID"
+              required
+            />
+          </div>
 
-        <label>Sales Person</label>
-        <Input {...register("salesPerson")} placeholder="Sales Person" required />
+          <div className="mb-3">
+            <label className="form-label">Sales Person</label>
+            <input
+              {...register("salesPerson")}
+              type="text"
+              className="form-control"
+              placeholder="Sales Person"
+              required
+            />
+          </div>
 
-        <label>UAE/Export</label>
-        <Select {...register("uaeExport")}>
-          <option value="UAE">UAE</option>
-          <option value="Export">Export</option>
-        </Select>
+          <div className="mb-3">
+            <label className="form-label">UAE/Export</label>
+            <select {...register("uaeExport")} className="form-select">
+              <option value="UAE">UAE</option>
+              <option value="Export">Export</option>
+            </select>
+          </div>
 
-        <label>Type</label>
-        <Input {...register("type")} placeholder="Type" required />
+          <div className="mb-3">
+            <label className="form-label">Type</label>
+            <input
+              {...register("type")}
+              type="text"
+              className="form-control"
+              placeholder="Type"
+              required
+            />
+          </div>
 
-        <label>Status</label>
-        <Select {...register("status")}>
-          <option value="Active">Active</option>
-          <option value="Inactive">Inactive</option>
-        </Select>
+          <div className="mb-3">
+            <label className="form-label">Status</label>
+            <select {...register("status")} className="form-select">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
 
-        <label>Website</label>
-        <Input {...register("website")} placeholder="Website" type="url" />
+          <div className="mb-3">
+            <label className="form-label">Website</label>
+            <input
+              {...register("website")}
+              type="url"
+              className="form-control"
+              placeholder="Website"
+            />
+          </div>
 
-        <label>About</label>
-        <Textarea {...register("about")} placeholder="About" />
+          <div className="mb-3">
+            <label className="form-label">About</label>
+            <textarea
+              {...register("about")}
+              className="form-control"
+              placeholder="About"
+            ></textarea>
+          </div>
 
-        <label>Last Ping Date</label>
-        <Input {...register("lastPingDate")} type="date" required />
+          <div className="mb-3">
+            <label className="form-label">Last Ping Date</label>
+            <input
+              {...register("lastPingDate")}
+              type="date"
+              className="form-control"
+              required
+            />
+          </div>
 
-        <label>Ping Comment</label>
-        <Textarea {...register("pingComment")} placeholder="Ping Comment" />
+          <div className="mb-3">
+            <label className="form-label">Ping Comment</label>
+            <textarea
+              {...register("pingComment")}
+              className="form-control"
+              placeholder="Ping Comment"
+            ></textarea>
+          </div>
 
-        <div className="flex gap-4">
-          <Button type="submit">Submit</Button>
-          <Button type="button" onClick={() => reset()}>Reset</Button>
-        </div>
-      </form>
+          <div className="d-flex gap-3">
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+            <button
+              type="button"
+              onClick={() => reset()}
+              className="btn btn-secondary"
+            >
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
